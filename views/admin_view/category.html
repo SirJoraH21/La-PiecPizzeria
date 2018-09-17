@@ -1,0 +1,25 @@
+<form action="" class="pt-2 pb-2">
+    <div class="form-group">
+        <label for="categoryName">Name category:</label>
+        <input id="categoryName" type="text" class="form-control" placeholder="type here..." ng-model="category.currentCategory.name">
+    </div>
+    <button type="button" class="btn btn-secondary" ng-click='category.addCategory()' ng-disabled="!category.currentCategory.name">Add</button>
+</form>
+<table class="table">
+    <thead>
+        <tr class="d-flex">
+            <th class="col-1">#</th>
+            <th class="col-9">Name</th>
+            <th class="col-1">Edit</th>
+            <th class="col-1">Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="d-flex" ng-repeat='categElem in category.categories track by categElem.id'>
+            <th class="col-1" scope="row">{{categElem.id}}</th>
+            <td class="col-9">{{categElem.name}}</td>
+            <td class="col-1"><button type="button" class="btn btn-secondary" ng-click='category.editCategory(categElem)'>Edit</button></td>
+            <td class="col-1"><button type="button" class="btn btn-secondary" ng-click='category.deleteCategory(categElem.id)'>Delete</button></td>
+        </tr>
+    </tbody>
+</table>

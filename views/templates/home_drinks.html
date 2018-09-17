@@ -1,0 +1,22 @@
+<div class="pageBlock">
+    <h3 class="pageTitle"><span class="redBB">Напої</span></h3>
+    <div class="productBlock" >
+        <div class="productBox" ng-repeat="item in drinks.products" ng-if="item.category.name=='drinks'">
+            <div class="productBoxImage">
+                <img class="productBoxImageSrc" src="img/Flamingo.jpg" alt="">
+            </div>
+            <div class="productBoxText">
+                <h3 class="productBoxTextTitle">{{item.name}}</h3>
+                <p class="productBoxTextRegular">{{item.description}}1</p>
+            </div>
+            <div class="productBoxPrice">
+                <p class="productBoxPriceText">{{item.price}} UAH</p>
+            </div>
+            <div class="productBoxBuy">
+                <div class="productBoxBuyButton">
+                    <a href="" class="buyButton">замовити</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

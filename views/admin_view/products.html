@@ -1,0 +1,77 @@
+<form>
+    <div class="form-group">
+        <label for="selectCategory">Category</label>
+        <select ng-options='category as category.name for category in products.categories track by category.id' name="" id="selectCategory" class="form-control" ng-model='products.currentItem.category'></select>
+    </div>
+    <div class="form-group">
+        <label for="itemName">Name product:</label>
+        <input id="itemName" type="text" class="form-control" placeholder="type here..." ng-model="products.currentItem.name">
+    </div>
+    <div class="form-group">
+        <label for="itemPrice">Price product:</label>
+        <input id="itemPrice" type="text" class="form-control" placeholder="type here..." ng-model="products.currentItem.price">
+    </div>
+    <div class="form-group">
+        <label for="itemFilter">Description product:</label>
+        <textarea name="" id="itemDescription" class="form-control col-12" ng-model="products.currentItem.description"></textarea>
+    </div>
+    <div class="form-group">
+        <div class="custom-file">
+            <!--<input type="file" class="custom-file-input" id="customFile" ng-model="products.currentItem.src" ng-change="item.fileImages(src)">-->
+            <input type="file" class="custom-file-input" id="customFile" select-ng-files ng-model="products.currentItem.src" multiple>
+            <label class="custom-file-label" for="customFile">Choose photo</label>
+
+        </div>
+    </div>
+    <button type="button" class="btn btn-secondary" ng-click='products.addItem()'>Add</button>
+</form>
+<form action="">
+    <div class="form-group">
+        <label for="itemSearch">Search:</label>
+        <input id="itemSearch" type="text" class="form-control" placeholder="type here..." ng-model="search">
+    </div>
+</form>
+<form action="">
+    <div class="form-group">
+        <label for="itemFilter">Filter price:</label>
+        <select name="" id="itemFilter" class="form-control" ng-model="search">
+            <option ng-value="x.price" ng-repeat="x in products.items">{{x.price}}</option>
+            <option value="">reset</option>
+        </select>
+    </div>
+</form>
+<form action="">
+    <div class="form-group">
+        <label for="itemFilterLimit">Filter limit:</label>
+        <select name="" id="itemFilterLimit" class="form-control" ng-model="myLimit">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="">reset</option>
+        </select>
+    </div>
+</form>
+<table class="table">
+    <thead>
+        <tr class="d-flex">
+            <th scope="col" class="col-1" ng-click="products.sortBy('id')">#</th>
+            <th scope="col" class="col-2" ng-click="products.sortBy('name')">Name</th>
+            <th scope="col" class="col-1" ng-click="products.sortBy('price')">Price</th>
+            <th scope="col" class="col-4">Description</th>
+            <th scope="col" class="col-2">Photo</th>
+            <th scope="col" class="col-1">Edit</th>
+            <th scope="col" class="col-1">Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="d-flex" ng-repeat='itemElem in products.items | orderBy:products.propertyName:products.reverse | filter:search | limitTo:myLimit track by itemElem.id'>
+            <th scope="row" class="col-1">{{itemElem.id}}</th>
+            <td class="col-2">{{itemElem.name | uppercase}}</td>
+            <td class="col-1">{{itemElem.price | number:2 }}</td>
+            <td class="col-4">{{itemElem.description | lowercase}}</td>
+            <td class="col-2"><img class="smallImg" ng-src="../img/{{itemElem.src[0].name}}"></td>
+            <td class="col-1"><button type="button" class="btn btn-warning" ng-click="products.editItem(itemElem)">Edit</button></td>
+            <td class="col-1"><button type="button" class="btn btn-danger" ng-click="products.removeItem(itemElem.id)">Delete</button></td>
+        </tr>
+    </tbody>
+</table>

@@ -1,0 +1,34 @@
+<form>
+    <div class="form-group">
+        <label for="itemName">Name product:</label>
+        <input id="itemName" type="text" class="form-control" placeholder="type here..." ng-model="sales.currentSale.name">
+    </div>
+    <div class="form-group">
+        <div class="custom-file">
+            <input type="file" class="custom-file-input" id="customFile" select-ng-files ng-model="sales.currentSale.src" multiple>
+            <label class="custom-file-label" for="customFile">Choose photo</label>
+        </div>
+    </div>
+    <button type="button" class="btn btn-secondary" ng-click='sales.addSale()'>Add</button>
+</form>
+<table class="table">
+    <thead>
+    <tr class="d-flex">
+        <th scope="col" class="col-1" ng-click="products.sortBy('id')">#</th>
+        <th scope="col" class="col-5">Name</th>
+        <th scope="col" class="col-4">Photo</th>
+        <th scope="col" class="col-1">Edit</th>
+        <th scope="col" class="col-1">Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="d-flex" ng-repeat='saleElem in sales.sales track by saleElem.id'>
+        <th scope="row" class="col-1">{{saleElem.id}}</th>
+        <td class="col-5">{{saleElem.name | uppercase}}</td>
+        <td class="col-4"><img class="smallImg" ng-src="../img/{{saleElem.src[0].name}}"></td>
+        <td class="col-1"><button type="button" class="btn btn-warning" ng-click="sales.editSale(itemElem)">Edit</button></td>
+        <td class="col-1"><button type="button" class="btn btn-danger" ng-click="sales.removeSale(itemElem.id)">Delete</button></td>
+    </tr>
+    </tbody>
+</table>
+
